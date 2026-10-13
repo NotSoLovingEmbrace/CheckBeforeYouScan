@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sicherheitshinweis</title>
+
   <style>
     body {
       margin: 0;
@@ -12,6 +13,30 @@
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
+    }
+
+    #start {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+    }
+
+    #start button {
+      padding: 18px 36px;
+      font-size: 24px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #111;
+    }
+
+    #content {
+      display: none;
     }
 
     h2 {
@@ -25,15 +50,44 @@
     }
   </style>
 </head>
-<body>
-  <h2>
-    Beim Scannen von QR-Codes den Link vor dem Öffnen immer zuerst prüfen!
-  </h2>
 
-  <video autoplay playsinline controls>
-    <source
-      src="https://juan-carlos.info/wp-content/uploads/sites/2/2021/11/Rick-Astley-Never-Gonna-Give-You-Up-Official-Music-Video.mp4"
-      type="video/mp4">
-  </video>
+<body>
+
+  <div id="start">
+    <button id="startButton">Click here</button>
+  </div>
+
+  <div id="content">
+    <h2>
+      Beim Scannen von QR-Codes den Link vor dem Öffnen immer zuerst prüfen!
+    </h2>
+
+    <video id="rickroll" playsinline controls>
+      <source
+        src="https://juan-carlos.info/wp-content/uploads/sites/2/2021/11/Rick-Astley-Never-Gonna-Give-You-Up-Official-Music-Video.mp4"
+        type="video/mp4">
+      Dein Browser unterstützt dieses Video nicht.
+    </video>
+  </div>
+
+  <script>
+    const button = document.getElementById("startButton");
+    const start = document.getElementById("start");
+    const content = document.getElementById("content");
+    const video = document.getElementById("rickroll");
+
+    button.addEventListener("click", async () => {
+      start.style.display = "none";
+      content.style.display = "block";
+
+      try {
+        await video.play();
+      } catch (error) {
+        content.style.display = "block";
+        video.controls = true;
+      }
+    });
+  </script>
+
 </body>
 </html>
